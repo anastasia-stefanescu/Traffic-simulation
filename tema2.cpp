@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cstdlib>
+#include <utility>
 
 // --------------------------------------
 class Intersectie{
@@ -28,8 +29,8 @@ class Strada{
 protected: //sau private?
     int x; //coord fixa
     int orientare;
-    //std::vector <Intersectie*> shared_ptr
-    //TODO: intersectiile pe strazi; de folosit: smart pointers, suprascriere cc si op=.
+    std::vector <std::shared_ptr <Intersectie>> inters_pe_strada;
+    //TODO: intersectiile pe strazi; de folosit: smart pointers
 public:
     //constructor virtual
     
@@ -66,7 +67,7 @@ public:
     virtual ObiectMiscator* clone() const = 0;
     
     virtual ~ObiectMiscator() = default;
-    //cc, op=, etc
+    //cc, op= de suprascris cu copy and swap
     //destructor
     
     virtual int poateMergeLaUrmatoareaPozitie(std::vector <Intersectie> vi) { return 0; }
@@ -291,7 +292,7 @@ int main()
     std::vector <Masina> v_masini;
     std::vector <Pieton> v_pietoni;
     //TODO: pt dynamic cast
-    // std::vector <ObiectMiscator> v_obiectMiscator (atat pentru masini si pietoni)
+     std::vector <ObiectMiscator> v_obiectMiscator; //(atat pentru masini si pietoni)
     // si apoi cu dynamic cast in ultimul for vedem in functie de tipul obiectului ce functie Misca() apelam
 //    if(dynamic_cast<Masina*>(v_obiectMiscator[i])) {
 //          v_obiectMiscator.Misca();
