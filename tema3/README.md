@@ -1,3 +1,4 @@
+**Simulare de trafic**
 In acest folder este tema3 care include si tema1 si tema2.
 
 Aplicatia contine mai multe clase care modeleaza masini, pietoni, strazi, intersectii(cu semafoare), calatori.
