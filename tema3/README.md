@@ -6,7 +6,7 @@ Aplicatia contine mai multe clase care modeleaza masini, pietoni, strazi, inters
 
 Mai jos mentionez (dau cateva exemple) cum au fost indeplinite cerintele: 
 **La tema 2 am folosit:**
- - smart pointers: shared_ptr in clasele ...
+ - smart pointers: shared_ptr in clasa Run
 - moșteniri: din ObiectMiscator sunt derivatele: Masina, Masina_prioritara, Pieton
 - funcții virtuale (pure)- din clasa ObiectMiscator
 - constructori virtuali (clone) - TODO
