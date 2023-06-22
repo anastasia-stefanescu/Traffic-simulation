@@ -7,9 +7,7 @@
 std::ifstream fin ("tema1.in");
 std::ofstream fout ("tema1.out");
 
-int nrStrazi, nrMasini, nrSem;
-int tabla[1001][1001];
-int tp_univ; //timpul valabil peste tot
+
 
 class Strada{
     double x1, y1, x2, y2; //coord de start si finish
@@ -48,20 +46,15 @@ public:
         std::cout << "Destr Strada\n";
     }
     
-//    std::pair<double, double> Intersectie(const Strada s1, const Strada s2) const {
-//        double x, y;
-//        x = (s2.b - s1.b) / (s1.a - s2.a);
-//        y = s1.a * x + s1.b;
-//        return std::make_pair(x, y);
-//    }
 };
-Strada str[101];
 
 class Masina{
     double viteza;
     double x1, y1; //de aici deducem si sensul; trb verificat ca punctul de spawning este pe o strada valida
     int moment;
 public:
+    Masina() {}
+    
     Masina(const double viteza_, const double x1_, const double y1_, int moment_): viteza{viteza_}, x1{x1_}, y1{y1_}, moment{moment_} {
         std::cout << "Am intializat var " <<'\n';
     } //de vazut daca initializam automat masina cu viteza si toate cele aici
@@ -88,25 +81,13 @@ public:
         std::cout << "Destr Masina\n";
     }
     
-    
-    
-    void spawn_masina(Masina& m){
-        m.moment = (abs(rand() - tp_univ)) % (tp_univ + 50) + tp_univ;
-        m.viteza = rand() % 7;
-        int ind =rand() % nrStrazi;
-        m.x1 = str[ind].getx1();
-        m.y1 = str[ind].gety1();
-        
-    }
-    
-//    void merge_masina
 };
 
 
 class Semafor{ // daca avem semafor avem automat si trecere
     bool activare;
     double x1, y1;
-    Strada& str;
+    Strada str;
     int moment;
 public:
     Semafor(const bool activare_, double x1_, const double y1_, Strada& str_, const int moment_ ): activare{activare_}, x1{x1_}, y1{y1_}, str{str_}, moment{moment_} {
@@ -140,17 +121,11 @@ public:
     double getCoordx() const { return x1; }
     double getCoordy() const { return y1; }
     
-//    void Devine_Verde(const int nrmasini, const Masina m[]) {
-//        int i, minim;
-//        for (i = 1; i<= nrmasini; i++)
-//            if(
-//               }
-    
 };
 
 class Pieton{ // daca avem semafor avem automat si trecere
     double x1, y1;
-    Semafor& sm;
+    Semafor sm;
     int moment;
 public:
     Pieton(double x1_, const double y1_, Semafor& sm_, const int moment_ ): x1{x1_}, y1{y1_}, sm{sm_}, moment{moment_} {
@@ -179,17 +154,53 @@ public:
         std::cout << "Destr pieton\n";
     }
 };
-               
+
+class Run {
+private:
+    std::vector <Strada>str;
+    std::vector <Masina> masini;
+    int tp_univ; //timpul valabil peste tot
+public:
+    void play(){
+    
+        Strada s1{0, 5, 14, 7};
+        Strada s2{5, 0, 8, 17};
+        Strada s3{s1};
+        
+        
+        Masina m1{3, 5, 6, 2};
+        Masina m2{4, 6, 9, 1};
+        
+        operator<<(operator<<(std::cout, s1), s2);
+        
+        
+        str.push_back(s1);
+        str.push_back(s2);
+        str.push_back(s3);
+        
+        masini.push_back(m1);
+        masini.push_back(m2);
+        
+        for (int i = 1; i<= 3; i++)
+        {
+            spawn_masina();
+            tp_univ++;
+        }
+    }
+    
+    void spawn_masina(){
+        int moment =(abs(rand() - tp_univ)) % (tp_univ + 50) + tp_univ;
+        double viteza = rand() % 7;
+        int ind =rand() % str.size();
+        double x1 = str[ind].getx1();
+        double y1 = str[ind].gety1();
+        Masina m{viteza, x1, y1, moment};
+        masini.push_back(m);
+    }
+    
+};
 int main()
 {
-    //Semafor sem1, sem2;
-    
-    Strada s1{0, 5, 14, 7};
-    Strada s2{5, 0, 8, 17};
-    Strada s3{s1};
-    
-    Masina m1{3, 5, 6, 2};
-    Masina m2{4, 6, 9, 1};
-    
-    operator<<(operator<<(std::cout, s1), s2);
+    Run simulare;
+    simulare.play();
 }
