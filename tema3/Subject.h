@@ -1,34 +1,36 @@
-
+#pragma once
 
 #ifndef Subject_h
 #define Subject_h
 
-#include "ObiecteMiscatoare.h"
-#include "Strazi.h"
+class ObiectMiscator;
+class Intersectie;
 
-template <typename T> class Subject {
+#include <iostream>
+//#include "ObiectMiscator.h"
+//#include "Intersectie.h"
+
+class Subject {
 private:
-    List<std::shared_ptr<T>> _observers;
+    std::vector<std::shared_ptr<ObiectMiscator>> _observers_obiectmiscator;
+    std::vector<std::shared_ptr<Intersectie>> _observers_intersectie;
 protected:
     Subject();
 public:
     virtual ~Subject();
-    void Attach(std::shared_ptr<T> o)
-    {
-        _observers->Append(o)
-    }
-    void Detach(std::shared_ptr<T> o)
-    {
-        _observers->Remove(o);
-    }
-    virtual void Notify()
-    {
-        ListIterator<std::shared_ptr<T>> i(_observers);
-        //construieste un iterator, i, pentru containerul_observers
-        for (i.First(); !i.IsDone(); i.Next()) { i.CurrentItem()->Update(this);}
-    }
+    
+    void Attach(std::shared_ptr<ObiectMiscator> o);
+    
+    void Attach(std::shared_ptr<Intersectie> o);
 
+    void Detach(std::shared_ptr<ObiectMiscator> o);
+    
+    void Detach(std::shared_ptr<Intersectie> o);
+
+    virtual void Notify();
 };
+
+#endif /* Subject_h */
 
 //class Subject {
 //public:
@@ -65,4 +67,4 @@ public:
 //};
 //
 
-#endif /* Subject_h */
+

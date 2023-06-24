@@ -1,22 +1,21 @@
+#pragma once
 
-
-#ifndef Header_h
-#define Header_h
+#ifndef Clock_h
+#define Clock_h
 
 #include "Subject.h"
 
-class Clock: public Subject<Intersectie>, public Subject<ObiectMiscator>{
+class Clock: public Subject {
     
     int timp;
+    
 public:
     Clock();
-    Clock(int start): timp(start) {}
-    int getTime() {return timp;}
+    Clock(int start);
     
-    void tick() {
-        timp++;
-        Notify();
-    }
+    int getTime();
+    
+    void tick();
 };
 
 #endif

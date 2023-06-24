@@ -1,11 +1,11 @@
+#pragma once
+
 #ifndef Strategy_h
 #define Strategy_h
 
-#include "Strazi.h"
-
-class Interfata_Transport{
+class Interfata_Transport {
 public:
-    virtual void transport(std::vector<std::shared_ptr<Intersectie>> vi) const= 0;
+    virtual void transport() const= 0;
 };
 
 

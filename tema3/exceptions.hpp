@@ -1,5 +1,3 @@
-
-
 #ifndef exceptions_hpp
 #define exceptions_hpp
 

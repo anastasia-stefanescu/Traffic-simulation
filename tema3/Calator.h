@@ -1,33 +1,24 @@
+#pragma once
 
 #ifndef Calator_h
 #define Calator_h
 
 #include "StrategyPattern.h"
-#include "Strazi.h"
+#include "Intersectie.h"
+#include <iostream>
 
-class Calator{
+class Calator {
 private:
     int cnp;
-    Transport* modTransport;
+    std::shared_ptr<Interfata_Transport> modTransport;
 public:
-    Calator(int cod, Transport* modInitial): cnp(cod), modTransport(modInitial) {
-        
-    }
+    Calator(int cod, std::shared_ptr<Interfata_Transport> modInitial);
     
-    void setModTransport(Transport* modNou)
-    {
-        if(modTransport != NULL)
-            delete modTransport;
-        modTransport = modNou;
-    }
-    void deplasare(std::vector<std::shared_ptr<Intersectie>> vi)
-    {
-        if(modTransport == NULL)
-            throw "Selecteaza mod transport";
-        modTransport -> transport(vi);
-    }
+    void setModTransport(std::shared_ptr<Interfata_Transport> modNou);
     
-    virtual ~Calator() {delete modTransport;}
-}
+    void deplasare();
+    
+    virtual ~Calator();
+};
 
 #endif /* Calator_h */
