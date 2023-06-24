@@ -22,7 +22,9 @@ set(debug_mode "$<OR:${is_debug},${is_rel_with_deb}>")
 
 function(set_custom_stdlib_and_sanitizers target add_apple_asan)
     if(MSVC)
-        target_compile_options(${target} PRIVATE "$<${debug_mode}:/fsanitize=address>")
+        # see https://gitlab.kitware.com/cmake/cmake/-/issues/24922
+        set_target_properties(${target} PROPERTIES VS_USER_PROPS "${CMAKE_SOURCE_DIR}/disable_modules.props")
+        target_compile_options(${target} PRIVATE "$<${debug_mode}:/fsanitize=address>" /experimental:module-)
         return()
     endif()
 
@@ -38,13 +40,15 @@ function(set_custom_stdlib_and_sanitizers target add_apple_asan)
             target_link_options(${target} PRIVATE "$<${debug_mode}:-fsanitize=address,undefined>")
         endif()
     elseif(UNIX)
-        if("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
+        if("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
             if("${CMAKE_CXX_COMPILER_VERSION}" MATCHES "12.")
                 # check leaks on Linux since macOS does not support the leaks sanitizer yet
                 # leaks sanitizer is enabled by default on Linux, so we do not need to enable it explicitly
                 target_compile_options(${target} PRIVATE "$<${debug_mode}:-fsanitize=address,undefined>")
                 target_link_options(${target} PRIVATE "$<${debug_mode}:-fsanitize=address,undefined>")
-            elseif("${CMAKE_CXX_COMPILER_VERSION}" MATCHES "13.")
+            endif()
+        elseif("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
+            if("${CMAKE_CXX_COMPILER_VERSION}" MATCHES "13.")
                 # use semi-colons instead of spaces to separate arguments
                 # it is recommended to quote generator expressions in order to avoid unintentional splitting
                 target_compile_options(${target} PRIVATE "$<${debug_mode}:-fsanitize=memory,undefined;-fsanitize-recover=memory,undefined;-fsanitize-memory-track-origins>")
@@ -80,7 +84,7 @@ endfunction()
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} tema23.cpp Run.cpp Subject.cpp ObiectMiscator.cpp Masina_prioritara.cpp Masina.cpp Pieton.cpp Calator.cpp Intersectie.cpp Strada.cpp Clock.cpp)
 
 ###############################################################################
 
@@ -125,3 +129,4 @@ set_custom_stdlib_and_sanitizers(${PROJECT_NAME} true)
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 # install(DIRECTORY some_dir1 some_dir2 DESTINATION bin)
 # install(FILES some_file1.txt some_file2.md DESTINATION bin)
+
