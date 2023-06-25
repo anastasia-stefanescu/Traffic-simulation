@@ -50,8 +50,9 @@ Aplicatia contine mai multe clase care modeleaza masini, pietoni, strazi, inters
 - [x] 2 șabloane de proiectare (design patterns):
    - Observer - care contine elemente in Observer.h, Subject.h, Clock.h : exista o clasa Clock care masoara timpul si toate elementele dinamice (Obiectele miscatoare, semafoarele din intersectii) isi schimba starea atunci cand se schimba timpul
    - StrategyPattern - am adaugat o clasa Calator (Calator.h) care poate folosi diferite tipuri de masini pentru a se deplasa. 
-- [ ] o funcție șablon (template) cu sens; minim 2 instanțieri
-- [ ] o clasă șablon cu sens; minim 2 instanțieri
+- [x] o funcție șablon (template) cu sens; minim 2 instanțieri
+- [x] o clasă șablon cu sens; minim 2 instanțieri
+      pentru template-uri v. [branch-ul adaugare-template-uri](https://github.com/anastasia-stefanescu/oop/tree/adaugare-template-uri)
 <!-- - [ ] o specializare pe funcție/clasă șablon -->
 - [ ] tag de `git`: de exemplu `v0.3` sau `v1.0`
 
