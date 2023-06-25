@@ -5,7 +5,7 @@
 
 class Interfata_Transport {
 public:
-    virtual void transport() const= 0;
+    virtual void transport() const = 0;
 };
 
 

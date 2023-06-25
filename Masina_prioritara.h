@@ -18,6 +18,8 @@ class Masina_prioritara: public ObiectMiscator, public Interfata_Transport {
 protected:
     Masina_prioritara(const Masina_prioritara& other) = default; //cc
     Masina_prioritara& operator=(const Masina_prioritara& other) = default; //op=
+    
+    //constructor virtual
 public:
     
     Masina_prioritara(Clock* cl);
