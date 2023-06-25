@@ -14,10 +14,10 @@ Aplicatia contine mai multe clase care modeleaza masini, pietoni, strazi, inters
 - [ ] pentru o clasă: constructor de copiere, `operator=` de copiere, destructor
 <!-- - [ ] pentru o altă clasă: constructor de mutare, `operator=` de mutare, destructor -->
 <!-- - [ ] pentru o altă clasă: toate cele 5 funcții membru speciale -->
-- [ ] `operator<<` pentru toate clasele pentru afișare (std::ostream)
-- [ ] cât mai multe `const` (unde este cazul)
-- [ ] implementarea a minim 3 funcții membru publice pentru funcționalități specifice temei alese
-- [ ] scenariu de utilizare a claselor definite:
+- [x] `operator<<` pentru toate clasele pentru afișare (std::ostream)
+- [x] cât mai multe `const` (unde este cazul)
+- [x] implementarea a minim 3 funcții membru publice pentru funcționalități specifice temei alese
+- [x] scenariu de utilizare a claselor definite:
   - crearea de obiecte și apelarea funcțiilor membru publice în main
   - vor fi adăugate în fișierul `tastatura.txt` exemple de date de intrare de la tastatură (dacă există)
 - [ ] tag de `git`: de exemplu `v0.1`
@@ -31,7 +31,7 @@ Aplicatia contine mai multe clase care modeleaza masini, pietoni, strazi, inters
   - [x] clasă cu atribut de tip pointer la o clasă de bază cu derivate
   - [x] funcții virtuale (pure) apelate prin pointeri de bază din clasa de mai sus, constructori virtuali (clone)
     - minim o funcție virtuală va fi **specifică temei** (e.g. nu simple citiri/afișări)
-  - [ ] apelarea constructorului din clasa de bază din constructori din derivate
+  - [x] apelarea constructorului din clasa de bază din constructori din derivate
   - [x] smart pointers
   - [ ] `dynamic_cast`
 - [ ] suprascris cc/op= pentru copieri/atribuiri corecte, copy and swap
