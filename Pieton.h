@@ -16,8 +16,8 @@ protected:
 
     
 public:
-    Pieton(Clock* cl);
-    Pieton(Clock* cl, int a, int b, int dir);
+    Pieton(class ClockO* cl);
+    Pieton(class ClockO* cl, int a, int b, int dir);
     
     int poateMergeLaUrmatoareaPozitie() const override;
     

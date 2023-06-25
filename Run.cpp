@@ -14,7 +14,8 @@ Run::Run() {
     int nrStrazi;
     
     //adaugam un clock
-    clock = new Clock(0);
+    clock_i = new class ClockI(0);
+    clock_o = new class ClockO(0);
     
     // adaugam strazile
     std::cin >> nrStrazi;
@@ -87,5 +88,8 @@ void Run::adaugaIntersectii(std::vector <std::shared_ptr<Strada>> v_strazi_orizo
 void Run::play(){
     
     for (int i = 1; i<= 10; i++)
-        clock->tick();
+    {
+        clock_i->tick();
+        clock_o->tick();
+    }
 }

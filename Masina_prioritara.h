@@ -24,15 +24,13 @@ protected:
     //constructor virtual
 public:
     
-    Masina_prioritara(Clock* cl);
+    Masina_prioritara(class ClockO* cl);
     
-    Masina_prioritara(Clock* cl, const std::shared_ptr<Strada> s);
+    Masina_prioritara(class ClockO* cl, const std::shared_ptr<Strada> s);
     
-    Masina_prioritara(Clock* cl, int a, int b, int dir);
+    Masina_prioritara(class ClockO* cl, int a, int b, int dir);
     
     void Misca() override;
-    
-    template void Update<ObiectMiscator>(ObiectMiscator*);
     
     void transport();
 };

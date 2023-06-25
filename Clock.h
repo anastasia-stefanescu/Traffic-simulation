@@ -5,8 +5,7 @@
 
 #include "Subject.h"
 
-class Clock: public Subject_intersectii, public Subject_obiecte {
-    
+template <class U> class Clock: public Subject<U>{
     int timp;
     
 public:
@@ -17,5 +16,34 @@ public:
     
     void tick();
 };
+
+Clock<ObiectMiscator> ClockO;
+Clock<Intersectie> ClockI;
+
+//class Clock_intersectii: public Subject_intersectii {
+//
+//    int timp;
+//
+//public:
+//    Clock();
+//    Clock(int start);
+//
+//    int getTime();
+//
+//    void tick();
+//};
+//
+//class Clock_intersectii: public Subject_obiecte {
+//
+//    int timp;
+//
+//public:
+//    Clock_intersectii();
+//    Clock(int start);
+//
+//    int getTime();
+//
+//    void tick();
+//};
 
 #endif

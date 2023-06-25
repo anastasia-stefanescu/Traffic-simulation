@@ -16,5 +16,7 @@ template <class T> void Subject<T>::Detach(std::shared_ptr<T> o)
 template <class T> void Subject<T>::Notify()
 {
     for (const auto& obs : _observers)
+    {
         obs->Update(this);
+    }
 }

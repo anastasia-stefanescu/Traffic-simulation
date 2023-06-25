@@ -1,16 +1,22 @@
 #ifndef Run_h
 #define Run_h
 
+#include <iostream>
+#include <vector>
+
 class Intersectie;
 class ObiectMiscator;
 class Strada;
+class ClockI;
+class ClockO;
 
-#include <iostream>
-#include "Clock.h"
+
+//#include "Clock.h"
 
 class Run{
     
-    static Clock* clock;
+    static class ClockI* clock_i;
+    static class ClockO* clock_o;
     
     const int stanga = 1;
     const int dreapta = 2;

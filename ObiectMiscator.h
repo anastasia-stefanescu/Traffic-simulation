@@ -9,10 +9,12 @@
 #include "Clock.h"
 #include "Subject.h"
 #include "Observer.h"
+class ClockO;
+class Subject_obiecte;
 
 class ObiectMiscator : public Observer, public std::enable_shared_from_this<ObiectMiscator> {
 protected:
-    Clock* clock;
+    class ClockO* clock;
     int x, y; //coordonatele curente
     int directie;
     int viteza; // 1 pentru Pieton, 2 pentru Masini, 4 pentru Masini prioritate
@@ -23,11 +25,11 @@ public:
     static const int jos = 3;
     static const int stanga = 4;
     
-    ObiectMiscator(Clock* cl);
+    ObiectMiscator(class ClockO* cl);
     
-    ObiectMiscator(Clock* cl, const std::shared_ptr<Strada> s);
+    ObiectMiscator(class ClockO* cl, const std::shared_ptr<Strada> s);
     
-    ObiectMiscator(Clock* cl, int a, int b, int dir);
+    ObiectMiscator(class ClockO* cl, int a, int b, int dir);
     
     virtual ~ObiectMiscator();
     
@@ -35,8 +37,6 @@ public:
     //virtual std::shared_ptr<ObiectMiscator> clone() const = 0;
     
     //cc, op=, etc
-
-    template void Update<ObiectMiscator>(ObiectMiscator*);
     
     void verificaDacaIeseDinTabla() const ;
     
@@ -44,7 +44,7 @@ public:
     
     virtual int poateMergeLaUrmatoareaPozitie() const;
     
-
+    void Update(class Subject_obiecte* s) override;
 };
 
 #endif /* ObiectMiscator_h */

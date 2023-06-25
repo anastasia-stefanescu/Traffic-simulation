@@ -1,10 +1,10 @@
 #include "Clock.h"
+template <class U> Clock<U>::Clock() : Subject<U>(U()) {}
+template <class U> Clock<U>::Clock(int start): timp(start) {}
 
-Clock::Clock(int start): timp(start) {}
+template <class U> int Clock<U>::getTime() {return timp;}
 
-int Clock::getTime() {return timp;}
-
-void Clock::tick() {
+template <class U> void Clock<U>::tick() {
     timp++;
-    Notify();
+    Subject<U>::Notify();
 }

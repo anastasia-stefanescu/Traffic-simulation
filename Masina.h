@@ -18,8 +18,8 @@ protected:
 
     
 public:
-    Masina(Clock* cl, const std::shared_ptr<Strada> s);
-    Masina(Clock* cl, int a, int b, int dir);
+    Masina(class ClockO* cl, const std::shared_ptr<Strada> s);
+    Masina(class ClockO* cl, int a, int b, int dir);
     
     void transport();
     

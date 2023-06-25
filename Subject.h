@@ -3,10 +3,13 @@
 #ifndef Subject_h
 #define Subject_h
 
+#include <iostream>
+#include <vector>
+
 class ObiectMiscator;
 class Intersectie;
 
-#include <iostream>
+
 
 template <class T> class Subject {
 private:

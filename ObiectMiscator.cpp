@@ -3,9 +3,9 @@
 #include "Run.h"
 #include "exceptions.hpp"
 
-ObiectMiscator::ObiectMiscator(Clock* cl): clock(cl) { clock->Attach(shared_from_this()); }
+ObiectMiscator::ObiectMiscator(class ClockO* cl): clock(cl) { clock->Attach(shared_from_this()); }
 
-ObiectMiscator::ObiectMiscator(Clock* cl, const std::shared_ptr<Strada> s): clock(cl)  {
+ObiectMiscator::ObiectMiscator(class ClockO* cl, const std::shared_ptr<Strada> s): clock(cl)  {
    if (s!= nullptr)
    {
        if (s->getOrientare() == 1) {
@@ -31,7 +31,7 @@ ObiectMiscator::ObiectMiscator(Clock* cl, const std::shared_ptr<Strada> s): cloc
 }
 
 
-ObiectMiscator::ObiectMiscator(Clock* cl, int a, int b, int dir): clock(cl), x(a), y(b), directie(dir) {
+ObiectMiscator::ObiectMiscator(class ClockO* cl, int a, int b, int dir): clock(cl), x(a), y(b), directie(dir) {
     clock->Attach(shared_from_this());
 }
 
@@ -39,7 +39,7 @@ ObiectMiscator::~ObiectMiscator(){
     clock->Detach(shared_from_this());
 }
 
-void ObiectMiscator::Update(Subject* s) {
+void ObiectMiscator::Update(class Subject_obiecte* s) {
     if (clock == s) //din 6 in 6 unitati de timp schimbam semaforul
         Misca();
 }

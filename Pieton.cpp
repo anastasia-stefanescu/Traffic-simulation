@@ -5,14 +5,14 @@
 #include "exceptions.hpp"
 
 
-Pieton::Pieton(Clock* cl) : ObiectMiscator(cl) {
+Pieton::Pieton(class ClockO* cl) : ObiectMiscator(cl) {
     x = rand() % 31;
     y = rand() % 31;
     directie = rand()%4+1;
     viteza = 1;
 }
 
-Pieton::Pieton(Clock* cl, int a, int b, int dir) : ObiectMiscator(cl, a, b, dir) {viteza = 1; }
+Pieton::Pieton(class ClockO* cl, int a, int b, int dir) : ObiectMiscator(cl, a, b, dir) {viteza = 1; }
 
 int Pieton::poateMergeLaUrmatoareaPozitie() const {
     std::vector<std::shared_ptr <Intersectie>> vi = Run::getVectIntersection();
