@@ -17,7 +17,7 @@ void Intersectie::schimbaSemafor(){
     semafor = 1-semafor;
 }
 
-void Intersectie::Update(Subject* s) {
+void Intersectie::Update(Subject_intersectii* s) {
     if (clock == s && clock->getTime() % 6 == 0) //din 6 in 6 unitati de timp schimbam semaforul
     {
         schimbaSemafor();

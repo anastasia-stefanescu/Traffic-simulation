@@ -3,30 +3,18 @@
 #include "ObiectMiscator.h"
 #include "Intersectie.h"
 
-void Subject::Attach(std::shared_ptr<ObiectMiscator> o)
+template <class T> void Subject<T>::Attach(std::shared_ptr<T> o)
 {
-    _observers_obiectmiscator.push_back(o);
+    _observers.push_back(o);
 }
 
-void Subject::Attach(std::shared_ptr<Intersectie> o)
+template <class T> void Subject<T>::Detach(std::shared_ptr<T> o)
 {
-    _observers_intersectie.push_back(o);
+    _observers.erase(std::remove(_observers.begin(), _observers.end(), o), _observers.end());
 }
 
-void Subject::Detach(std::shared_ptr<ObiectMiscator> o)
+template <class T> void Subject<T>::Notify()
 {
-    _observers_obiectmiscator.erase(std::remove(_observers_obiectmiscator.begin(), _observers_obiectmiscator.end(), o), _observers_obiectmiscator.end());
-}
-
-void Subject::Detach(std::shared_ptr<Intersectie> o)
-{
-    _observers_intersectie.erase(std::remove(_observers_intersectie.begin(), _observers_intersectie.end(), o), _observers_intersectie.end());
-}
-
-void Subject::Notify()
-{
-    for (const auto& obs : _observers_intersectie)
-        obs->Update(this);
-    for (const auto& obs : _observers_obiectmiscator)
+    for (const auto& obs : _observers)
         obs->Update(this);
 }

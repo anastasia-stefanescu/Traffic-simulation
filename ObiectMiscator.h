@@ -36,7 +36,7 @@ public:
     
     //cc, op=, etc
 
-    void Update(Subject* theChangedSubject) override;// TODO override
+    template void Update<ObiectMiscator>(ObiectMiscator*);
     
     void verificaDacaIeseDinTabla() const ;
     

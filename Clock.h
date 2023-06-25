@@ -5,7 +5,7 @@
 
 #include "Subject.h"
 
-class Clock: public Subject {
+class Clock: public Subject_intersectii, public Subject_obiecte {
     
     int timp;
     

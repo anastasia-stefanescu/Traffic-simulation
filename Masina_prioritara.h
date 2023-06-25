@@ -3,6 +3,8 @@
 #ifndef Masina_prioritara_h
 #define Masina_prioritara_h
 
+class Subject_obiecte;
+
 #include "ObiectMiscator.h"
 #include "Clock.h"
 #include "Strada.h"
@@ -30,7 +32,7 @@ public:
     
     void Misca() override;
     
-    virtual void Update(Subject* theChangedSubject) override;
+    template void Update<ObiectMiscator>(ObiectMiscator*);
     
     void transport();
 };

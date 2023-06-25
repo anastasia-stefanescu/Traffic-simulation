@@ -4,6 +4,8 @@
 #define Intersectie_h
 
 class Clock;
+class Subject_intersectii;
+class Subject_obiecte;
 
 #include "Observer.h"
 #include <iostream>
@@ -29,7 +31,7 @@ public:
     
     void schimbaSemafor();
     
-    void Update(Subject*) override;
+    void Update(Subject_intersectii*) override;
 };
 
 #endif /* Intersectie_h */
