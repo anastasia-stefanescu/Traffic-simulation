@@ -84,7 +84,7 @@ endfunction()
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
-add_executable(${PROJECT_NAME} tema23.cpp Run.cpp Subject.cpp ObiectMiscator.cpp Masina_prioritara.cpp Masina.cpp Pieton.cpp Calator.cpp Intersectie.cpp Strada.cpp Clock.cpp)
+add_executable(${PROJECT_NAME} main.cpp)
 
 ###############################################################################
 
