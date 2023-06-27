@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include <string>
+#include <cstring>
 
 class Eroare: public std::out_of_range {
 public:
