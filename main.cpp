@@ -1,21 +1,21 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include <cstring>
+#include <string>
 
 class Eroare: public std::out_of_range {
 public:
-    Eroare(const std::string& message) : std::out_of_range(message) {}
+    explicit Eroare(const std::string& message) : std::out_of_range(message) {}
 };
 
 class OutofRange: public Eroare {
 public:
-    OutofRange(const std::string& message) :  Eroare (message) {}
+    explicit OutofRange(const std::string& message) :  Eroare (message) {}
 };
 
 class NotonStreet: public Eroare {
 public:
-    NotonStreet(const std::string& message) : Eroare(message) {}
+    explicit NotonStreet(const std::string& message) : Eroare(message) {}
 };
 
 //================================================================
@@ -28,7 +28,7 @@ class Calator {
 private:
     std::shared_ptr<Interfata_Transport> modTransport;
 public:
-    Calator(std::shared_ptr<Interfata_Transport> modInitial);
+    explicit Calator(std::shared_ptr<Interfata_Transport> modInitial);
     
     void setModTransport(std::shared_ptr<Interfata_Transport> modNou);
     
@@ -37,7 +37,7 @@ public:
     virtual ~Calator();
 };
 
-Calator::Calator(std::shared_ptr<Interfata_Transport> modInitial):modTransport(modInitial) {
+Calator::Calator(std::shared_ptr<Interfata_Transport> modInitial): modTransport(modInitial) {
     
 }
 
@@ -143,7 +143,7 @@ template <class U> class Clock: public Subject<U>{
     
 public:
     Clock();
-    Clock(int start);
+    explicit Clock(int start);
     
     int getTime();
     
@@ -165,7 +165,7 @@ template<class T> class Observer {
     
 public:
     virtual ~Observer() = default;
-    virtual void Update(Subject<T>* changedSubject){}
+    virtual void Update(Subject<T>*){}
 protected:
     Observer() = default;
 };
@@ -193,8 +193,8 @@ public:
     void Update(Subject<Intersectie>* s) override;
 };
 
-template class Subject <Intersectie>;
-using Subject_intersectii = Subject<Intersectie>;
+//template class Subject <Intersectie>;
+//using Subject_intersectii = Subject<Intersectie>;
 Intersectie::Intersectie(Clock<Intersectie>*
                          cl, int sem, int a, int b): clock(cl), semafor(sem), x(a), y(b) {
     clock->Attach(this);
@@ -246,7 +246,7 @@ public:
     virtual ~ObiectMiscator();
     
     //virtual ObiectMiscator* clone() const = 0;
-    virtual std::shared_ptr<ObiectMiscator> clone() const = 0;
+    //virtual std::shared_ptr<ObiectMiscator> clone() const = 0;
     
     //cc, op=, etc
     
@@ -379,7 +379,7 @@ public:
     Masina_prioritara(const Masina_prioritara& other) = default; //cc
     Masina_prioritara& operator=(const Masina_prioritara& other) = default; //op=
     
-    Masina_prioritara(Clock<ObiectMiscator>* cl);
+    explicit Masina_prioritara(Clock<ObiectMiscator>* cl);
     
     Masina_prioritara(Clock<ObiectMiscator>* cl, const std::shared_ptr<Strada> s);
     
@@ -388,7 +388,7 @@ public:
     void Misca() override;
     
     void transport() override;
-    std::shared_ptr<ObiectMiscator> clone() const override { return std::make_shared<Masina_prioritara>(*this); }
+    //std::shared_ptr<ObiectMiscator> clone() const override { return std::make_shared<Masina_prioritara>(*this); }
     
     
 };
@@ -434,7 +434,7 @@ public:
     
     void transport() override;
     
-    std::shared_ptr<ObiectMiscator> clone() const override { return std::make_shared<Masina>(*this); }
+    //std::shared_ptr<ObiectMiscator> clone() const override { return std::make_shared<Masina>(*this); }
 };
 
 Masina::Masina(Clock<ObiectMiscator>* cl, const std::shared_ptr<Strada> s): ObiectMiscator(cl, s) { viteza = 2; }
@@ -451,13 +451,13 @@ public:
     Pieton(const Pieton& other) = default; //cc
     Pieton& operator=(const Pieton& other) = default; //op=
 
-    Pieton(Clock<ObiectMiscator>* cl);
+    explicit Pieton(Clock<ObiectMiscator>* cl);
     Pieton(Clock<ObiectMiscator>* cl, int a, int b, int dir);
     
     int poateMergeLaUrmatoareaPozitie() const override;
     
     //ObiectMiscator* clone() const override { return new Pieton(*this); }
-    std::shared_ptr<ObiectMiscator> clone() const override { return std::make_shared<Pieton>(*this); }
+    //std::shared_ptr<ObiectMiscator> clone() const override { return std::make_shared<Pieton>(*this); }
 };
 
 Pieton::Pieton(Clock<ObiectMiscator>* cl) : ObiectMiscator(cl) {
@@ -480,10 +480,10 @@ class Run{
     static Clock<Intersectie>* clock_i;
     static Clock<ObiectMiscator>* clock_o;
     
-    // const int stanga = 1;
-    // const int dreapta = 2;
-    // const int jos = 3;
-    // const int sus = 4;
+//    const int stanga = 1;
+//    const int dreapta = 2;
+//    const int jos = 3;
+//    const int sus = 4;
     
     static std::vector <std::shared_ptr<Intersectie>> v_intersectii;
     std::vector <std::shared_ptr<ObiectMiscator>> v_masini;
@@ -513,6 +513,7 @@ std::vector<std::shared_ptr<Intersectie>> Run::v_intersectii;
 Run::Run() {
   
     int nrStrazi;
+    int i, j;
     
     
     //adaugam un clock
@@ -523,7 +524,7 @@ Run::Run() {
     std::cin >> nrStrazi;
 
     std::shared_ptr <Strada> s;
-    for (int i = 1; i<= nrStrazi; i++)
+    for (i = 1; i<= nrStrazi; i++)
     {
         
         do{
@@ -540,9 +541,9 @@ Run::Run() {
         {
             v_strazi_orizontale.push_back(s);
             int NrVerticale = (int)v_strazi_verticale.size();
-            for(int i = 0; i<NrVerticale; i++)
+            for(j = 0; j<NrVerticale; j++)
             {
-                auto intersectie = std::make_shared<Intersectie>(clock_i, 1, s->getCoordY(), v_strazi_verticale[i]->getCoordX());
+                auto intersectie = std::make_shared<Intersectie>(clock_i, 1, s->getCoordY(), v_strazi_verticale[j]->getCoordX());
                 v_intersectii.push_back(intersectie);
             }
         }
@@ -550,9 +551,9 @@ Run::Run() {
         {
             v_strazi_verticale.push_back(s);
             int NrOrizontale = (int)v_strazi_orizontale.size();
-            for(int i = 0; i<NrOrizontale; i++)
+            for(j = 0; j<NrOrizontale; j++)
             {
-                auto intersectie = std::make_shared<Intersectie>(clock_i, 1, s->getCoordX(), v_strazi_orizontale[i]->getCoordY());
+                auto intersectie = std::make_shared<Intersectie>(clock_i, 1, s->getCoordX(), v_strazi_orizontale[j]->getCoordY());
                 v_intersectii.push_back(intersectie);
             }
         }
@@ -570,7 +571,7 @@ Run::Run() {
     }
     
     //adaugam pietoni
-    for (int i = 1; i <= 10; i++)
+    for (i = 1; i <= 10; i++)
     {
         //std::shared_ptr <ObiectMiscator> basePieton = std::make_shared<Pieton>(clock);
         v_pietoni.emplace_back(std::make_shared<Pieton>(clock_o));
@@ -580,7 +581,8 @@ Run::Run() {
     std::shared_ptr<Interfata_Transport> m1 = std::make_shared<Masina>(clock_o, v_strazi_verticale[1]);
     std::shared_ptr<Interfata_Transport> m2 = std::make_shared<Masina_prioritara>(clock_o, v_strazi_orizontale[1]);
     Calator c1(m1);
-    Calator c2(m2);
+    c1.setModTransport(m2);
+    Calator c2(m1);
     try{
         c1.deplasare();
     }catch(NotonStreet& err)
@@ -597,8 +599,9 @@ Run::Run() {
 }
 
 void Run::play(){
+    int i;
     
-    for (int i = 1; i<= 10; i++)
+    for (i = 1; i<= 10; i++)
     {
         clock_i->tick();
         clock_o->tick();
@@ -607,10 +610,11 @@ void Run::play(){
 }
 
 void Run::afisare(){
+    int i, j;
     char tabla[30][30][10];
     
-    for(int i = 1; i<= 29; i++)
-        for(int j = 1; j<= 29; j++)
+    for(i = 1; i<= 29; i++)
+        for(j = 1; j<= 29; j++)
             strcpy(tabla[i][j],"|_");
         
 
@@ -629,7 +633,7 @@ void Run::afisare(){
     for (const auto& pietoni: v_pietoni)
         strcpy(tabla[pietoni->getX()][pietoni->getY()], "|P");
     
-    for(int i = 1; i<= 29; i++)
+    for(i = 1; i<= 29; i++)
     {
         for(int j = 1; j<= 29; j++)
             std::cout << tabla[i][j];
@@ -640,6 +644,7 @@ void Run::afisare(){
 
 //===================================================================
 int Pieton::poateMergeLaUrmatoareaPozitie() const {
+    int i;
     std::vector<std::shared_ptr <Intersectie>> vi = Run::getVectIntersection();
     
     int next_x = x, next_y = y;
@@ -662,7 +667,7 @@ int Pieton::poateMergeLaUrmatoareaPozitie() const {
     
     int nrInters = (int)vi.size();
     
-    for (int i = 0; i<nrInters; i++) //este in vreo intersectie
+    for (i = 0; i<nrInters; i++) //este in vreo intersectie
         if (next_x == vi[i]->getX() && next_y == vi[i]->getY())
         {
             if (vi[i]->getSemafor() == 1) // verde
@@ -684,6 +689,7 @@ int Pieton::poateMergeLaUrmatoareaPozitie() const {
 }
 
 int ObiectMiscator::poateMergeLaUrmatoareaPozitie() const {
+    int i;
     std::vector<std::shared_ptr <Intersectie>> vi = Run::getVectIntersection();
 
     int next_x = x, next_y = y;
@@ -706,7 +712,7 @@ int ObiectMiscator::poateMergeLaUrmatoareaPozitie() const {
 
     int nrInters = (int)vi.size();
 
-    for (int i = 0; i<nrInters; i++) //este in vreo intersectie
+    for (i = 0; i<nrInters; i++) //este in vreo intersectie
         if (next_x == vi[i]->getX() && next_y == vi[i]->getY())
         {
             if (vi[i]->getSemafor() == 1) // verde
