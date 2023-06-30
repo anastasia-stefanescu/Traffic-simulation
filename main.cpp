@@ -238,7 +238,7 @@ public:
     int getX() {return x;}
     int getY() {return y;}
     
-    ObiectMiscator(Clock<ObiectMiscator>* cl);
+    explicit ObiectMiscator(Clock<ObiectMiscator>* cl);
     
     ObiectMiscator(Clock<ObiectMiscator>* cl, const std::shared_ptr<Strada> s);
     
