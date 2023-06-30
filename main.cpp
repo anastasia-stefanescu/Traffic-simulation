@@ -614,29 +614,61 @@ void Run::afisare(){
     int i, j;
     char tabla[30][30][10];
     
+     for (i = 1; i<= 10; i++)
+    {
+        clock_i->tick();
+        clock_o->tick();
+        afisare();
+    }
+}
+
+void Run::afisare(){
+    int i, j;
+    char tabla[30][30][10];
+    
     for(i = 1; i<= 29; i++)
         for(j = 1; j<= 29; j++)
-            strcpy(tabla[i][j],"|_");
+            strcpy(tabla[i][j],"  ");
         
 
     for (const auto& inters: v_intersectii)
-        strcpy(tabla[inters->getX()][inters->getY()], "|X");
+    {
+        if(inters->getX()!= 1)
+            for(i = 1; i<=29; i++)
+                strcpy(tabla[inters->getX()][i], "==");
+        else
+            for(i = 1; i<=29; i++)
+                strcpy(tabla[i][inters->getY()], "||");
+        strcpy(tabla[inters->getX()][inters->getY()], "X ");
+    }
     
     for (const auto& masina: v_masini)
     {
         auto m = dynamic_pointer_cast<Masina>(masina);
         if(m)
-            strcpy(tabla[masina->getX()][masina->getY()], "|M");
+            strcpy(tabla[masina->getX()][masina->getY()], "M ");
         else
-            strcpy(tabla[masina->getX()][masina->getY()], "|M");
+            strcpy(tabla[masina->getX()][masina->getY()], "M ");
     }
     
     for (const auto& pietoni: v_pietoni)
-        strcpy(tabla[pietoni->getX()][pietoni->getY()], "|P");
+        strcpy(tabla[pietoni->getX()][pietoni->getY()], "P ");
     
+    std::cout << "Momentul " << clock_o->getTime() << " ==================================================== \n" << '\n';
+    std::cout << "  ";
+    for (i = 1; i<= 29; i++)
+        if(i < 10)
+            std::cout << i << " ";
+        else
+            std::cout << i;
+    std::cout << '\n';
     for(i = 1; i<= 29; i++)
     {
-        for(j = 1; j<= 29; j++)
+        if(i < 10)
+            std::cout << i << " ";
+        else
+            std::cout << i;
+        for(int j = 1; j<= 29; j++)
             std::cout << tabla[i][j];
         std::cout << '\n';
     }
@@ -737,6 +769,10 @@ int ObiectMiscator::poateMergeLaUrmatoareaPozitie() const {
 //==========================================================================================================
 int main()
 {
+    std::cout<< "Masinile sunt notate cu M, Masinile prioritare cu MP, pietonii cu P" << '\n';
+    std::cout << "X reprezinta intersectia unor strazi" << '\n';
+    std::cout << "Masinile si Masinile prioritare se pot misca doar pe strazi, dar pietonii oriunde" << '\n';
+    std::cout << "Inserati numarul de strazi " << '\n';
     Run run_simulation;
     run_simulation.play();
     
