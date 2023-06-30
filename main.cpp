@@ -26,10 +26,9 @@ public:
 //================================================================
 class Calator {
 private:
-    int cnp;
     std::shared_ptr<Interfata_Transport> modTransport;
 public:
-    Calator(int cod, std::shared_ptr<Interfata_Transport> modInitial);
+    Calator(std::shared_ptr<Interfata_Transport> modInitial);
     
     void setModTransport(std::shared_ptr<Interfata_Transport> modNou);
     
@@ -38,7 +37,7 @@ public:
     virtual ~Calator();
 };
 
-Calator::Calator(int cod, std::shared_ptr<Interfata_Transport> modInitial): cnp(cod), modTransport(modInitial) {
+Calator::Calator(std::shared_ptr<Interfata_Transport> modInitial):modTransport(modInitial) {
     
 }
 
@@ -213,8 +212,8 @@ void Intersectie::schimbaSemafor(){
     semafor = 1-semafor;
 }
 
-void Intersectie::Update(Subject_intersectii* s){
-        auto c = dynamic_cast<Subject_intersectii*>(clock);
+void Intersectie::Update(Subject<Intersectie>* s){
+        auto c = dynamic_cast<Subject<Intersectie>*>(clock);
     if (c == s && clock->getTime() % 6 == 0) //din 6 in 6 unitati de timp schimbam semaforul
     {
         schimbaSemafor();
@@ -481,10 +480,10 @@ class Run{
     static Clock<Intersectie>* clock_i;
     static Clock<ObiectMiscator>* clock_o;
     
-    const int stanga = 1;
-    const int dreapta = 2;
-    const int jos = 3;
-    const int sus = 4;
+    // const int stanga = 1;
+    // const int dreapta = 2;
+    // const int jos = 3;
+    // const int sus = 4;
     
     static std::vector <std::shared_ptr<Intersectie>> v_intersectii;
     std::vector <std::shared_ptr<ObiectMiscator>> v_masini;
@@ -580,8 +579,8 @@ Run::Run() {
     //adaugam calatori
     std::shared_ptr<Interfata_Transport> m1 = std::make_shared<Masina>(clock_o, v_strazi_verticale[1]);
     std::shared_ptr<Interfata_Transport> m2 = std::make_shared<Masina_prioritara>(clock_o, v_strazi_orizontale[1]);
-    Calator c1(1, m1);
-    Calator c2(2, m2);
+    Calator c1(m1);
+    Calator c2(m2);
     try{
         c1.deplasare();
     }catch(NotonStreet& err)
