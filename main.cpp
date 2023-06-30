@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 #include <vector>
 #include <memory>
 #include <string>
@@ -635,7 +636,7 @@ void Run::afisare(){
     
     for(i = 1; i<= 29; i++)
     {
-        for(int j = 1; j<= 29; j++)
+        for(j = 1; j<= 29; j++)
             std::cout << tabla[i][j];
         std::cout << '\n';
     }
