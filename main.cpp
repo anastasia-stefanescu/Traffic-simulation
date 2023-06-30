@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include <thread>
 
 class Eroare: public std::out_of_range {
 public:
@@ -606,6 +607,7 @@ void Run::play(){
     {
         clock_i->tick();
         clock_o->tick();
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         afisare();
     }
 }
