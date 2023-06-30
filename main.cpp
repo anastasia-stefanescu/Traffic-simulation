@@ -406,16 +406,16 @@ void Masina_prioritara::Misca()
     switch(directie)
     {
         case sus:
-            x -= viteza;
+            x--;
             break;
         case dreapta:
-            y+= viteza;
+            y++;
             break;
         case jos:
-            x+= viteza;
+            x++;
             break;
         case stanga:
-            y-= viteza;
+            y--;
             break;
     }
     verificaDacaIeseDinTabla();
@@ -668,7 +668,7 @@ void Run::afisare(){
             std::cout << i << " ";
         else
             std::cout << i;
-        for(int j = 1; j<= 29; j++)
+        for(j = 1; j<= 29; j++)
             std::cout << tabla[i][j];
         std::cout << '\n';
     }
