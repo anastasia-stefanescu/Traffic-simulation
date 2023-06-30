@@ -611,18 +611,6 @@ void Run::play(){
 }
 
 void Run::afisare(){
-    int i;
-    char tabla[30][30][10];
-    
-     for (i = 1; i<= 10; i++)
-    {
-        clock_i->tick();
-        clock_o->tick();
-        afisare();
-    }
-}
-
-void Run::afisare(){
     int i, j;
     char tabla[30][30][10];
     
