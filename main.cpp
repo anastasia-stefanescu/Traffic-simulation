@@ -648,7 +648,7 @@ void Run::afisare(){
         if(m)
             strcpy(tabla[masina->getX()][masina->getY()], "M ");
         else
-            strcpy(tabla[masina->getX()][masina->getY()], "M ");
+            strcpy(tabla[masina->getX()][masina->getY()], "MP");
     }
     
     for (const auto& pietoni: v_pietoni)
